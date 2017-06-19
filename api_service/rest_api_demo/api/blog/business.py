@@ -1,6 +1,9 @@
 from rest_api_demo.database import db
 from rest_api_demo.database.models import Post, Category
 
+db_host = "localhost"
+db_port = 28015
+
 
 def create_blog_post(data):
     title = data.get('title')

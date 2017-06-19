@@ -9,8 +9,8 @@ from rest_api_demo.api.restplus import api
 from rest_api_demo.database import db
 
 app = Flask(__name__)
-logging.config.fileConfig('logging.conf')
-log = logging.getLogger(__name__)
+#logging.config.fileConfig('logging.conf')
+#log = logging.getLogger(__name__)
 
 @app.route('/newGame')
 def new_game():
@@ -45,7 +45,7 @@ def initialize_app(flask_app):
 
 def main():
     initialize_app(app)
-    log.info('>>>>> Starting development server at http://{}/api/ <<<<<'.format(app.config['SERVER_NAME']))
+    #log.info('>>>>> Starting development server at http://{}/api/ <<<<<'.format(app.config['SERVER_NAME']))
     app.run(host="0.0.0.0")
 
 if __name__ == "__main__":

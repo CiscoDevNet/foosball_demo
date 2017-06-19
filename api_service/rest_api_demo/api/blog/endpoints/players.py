@@ -4,7 +4,7 @@ import rethinkdb as r
 
 from flask import request
 from flask_restplus import Resource
-from rest_api_demo.api.blog.business import create_category, delete_category, update_category
+from rest_api_demo.api.blog.business import db_host, db_port
 from rest_api_demo.api.blog.serializers import player_names
 from rest_api_demo.api.restplus import api
 from rest_api_demo.database.models import Category
@@ -25,7 +25,7 @@ class root_players(Resource):
         """
         keys = ["", ""]
 
-        r.connect("localhost", 28015).repl()
+        r.connect(db_host, db_port).repl()
         active_game = r.db("foosball").table("games").filter(r.row["active"] == True)
         for i, row in enumerate(active_game.run()):
             keys[i] = (str(row["id"]))
@@ -57,7 +57,7 @@ class root_players(Resource):
         Update both players names.
         """
         keys = ["", ""]
-        r.connect("localhost", 28015).repl()
+        r.connect(db_host, db_port).repl()
         active_game = r.db("foosball").table("games").filter(r.row["active"] == True)
         for i, row in enumerate(active_game.run()):
             keys[i] = (str(row["id"]))
@@ -107,7 +107,7 @@ class root_player_player(Resource):
         Must be player1 or player2
         """
         keys = ["", ""]
-        r.connect("localhost", 28015).repl()
+        r.connect(db_host, db_port).repl()
 
         # Get active game
         active_game = r.db("secret").table("games").filter(r.row["active"] == True)
@@ -155,7 +155,7 @@ class root_player_name(Resource):
         Must be player1 or player2
         """
         keys = ["", ""]
-        r.connect("localhost", 28015).repl()
+        r.connect(db_host, db_port).repl()
 
         # Get active game
         active_game = r.db("foosball").table("games").filter(r.row["active"] == True)

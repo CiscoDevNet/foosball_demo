@@ -5,7 +5,7 @@ import rethinkdb as r
 
 from flask import request
 from flask_restplus import Resource
-from rest_api_demo.api.blog.business import create_category, delete_category, update_category
+from rest_api_demo.api.blog.business import db_host, db_port
 from rest_api_demo.api.blog.serializers import scores
 from rest_api_demo.api.restplus import api
 from rest_api_demo.database.models import Category
@@ -26,7 +26,7 @@ class CategoryCollection(Resource):
         """
         keys = ["",""]
 
-        r.connect("localhost", 28015).repl()
+        r.connect(db_host, db_port).repl()
         active_game = r.db("foosball").table("games").filter(r.row["active"] == True)
         for i, row in enumerate(active_game.run()):
             keys[i] = (str(row["id"]))
@@ -56,7 +56,7 @@ class CategoryCollection(Resource):
         Update both players scores.
         """
         keys = ["", ""]
-        r.connect("localhost", 28015).repl()
+        r.connect(db_host, db_port).repl()
         active_game = r.db("foosball").table("games").filter(r.row["active"] == True)
         for i, row in enumerate(active_game.run()):
             keys[i] = (str(row["id"]))
@@ -104,7 +104,7 @@ class CategoryItem(Resource):
         """
         keys = ["", ""]
 
-        r.connect("localhost", 28015).repl()
+        r.connect(db_host, db_port).repl()
         active_game = r.db("foosball").table("games").filter(r.row["active"] == True)
         for i, row in enumerate(active_game.run()):
             keys[i] = (str(row["id"]))
@@ -141,7 +141,7 @@ class and1(Resource):
         keys = ["", ""]
         # Bool representing if the player has won
         winner = False
-        r.connect("localhost", 28015).repl()
+        r.connect(db_host, db_port).repl()
         # Get active game
         active_game = r.db("foosball").table("games").filter(r.row["active"] == True)
         for i, row in enumerate(active_game.run()):
@@ -198,7 +198,7 @@ class ScoreByPlayer(Resource):
         Sets the score for a the player specified in the ULR the the score specified by url_score
         """
         keys = ["", ""]
-        r.connect("localhost", 28015).repl()
+        r.connect(db_host, db_port).repl()
         # Get active game
         active_game = r.db("foosball").table("games").filter(r.row["active"] == True)
         for i, row in enumerate(active_game.run()):

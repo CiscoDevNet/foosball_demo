@@ -8,7 +8,7 @@ import time
 
 from flask import request, jsonify
 from flask_restplus import Resource
-from rest_api_demo.api.blog.business import create_category, delete_category, update_category
+from rest_api_demo.api.blog.business import db_host, db_port
 #from rest_api_demo.api.blog.serializers import category
 from rest_api_demo.api.restplus import api
 #from rest_api_demo.database.models import Category
@@ -35,7 +35,7 @@ class CategoryCollection(Resource):
         #Init vars
         keys = ["",""]
 
-        r.connect("localhost", 28015).repl()
+        r.connect(db_host, db_port).repl()
         active_game = r.db("foosball").table("games").filter(r.row["active"] == True)
         for i, row in enumerate(active_game.run()):
             keys[i] = (str(row["id"]))
@@ -85,7 +85,7 @@ class CategoryCollection(Resource):
         keys = ["", ""]
 
         print("post!")
-        r.connect("localhost", 28015).repl()
+        r.connect(db_host, db_port).repl()
         active_game = r.db("foosball").table("games").filter(r.row["active"] == True)
         # Deactivate any active games
         for i, row in enumerate(active_game.run()):
@@ -140,7 +140,7 @@ class CategoryItem(Resource):
 	Get the results of a historic game give the GameID in the URL.
 
         """
-        r.connect("localhost", 28015).repl()
+        r.connect(db_host, db_port).repl()
         resp = (r.db('foosball').table("games").get(game_id).run())
 
         final_resp = json.loads(json.dumps(resp))
@@ -152,7 +152,7 @@ class CategoryItem(Resource):
         """
         Deletes game.
         """
-        r.connect("localhost", 28015).repl()
+        r.connect(db_host, db_port).repl()
         try:
             resp = (r.db('foosball').table("games").get(game_id).delete().run())
         except Exception as e:
@@ -181,7 +181,7 @@ class CategoryItem(Resource):
         # Init vars
         keys = ["", ""]
 
-        r.connect("localhost", 28015).repl()
+        r.connect(db_host, db_port).repl()
         active_game = r.db("foosball").table("games").filter(r.row["active"] == True)
         # Delete any active games
         for i, row in enumerate(active_game.run()):
