@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+
+<h1>DevNet Sandbox Foosball Demo!</h1>
+
+<p>Ready to play? Put in your data below!</p>
+
+<script>
+function newGame() {
+    var body = {
+    player1: {},
+    player2: {}
+    };
+    var success;
+    var x = document.getElementById("frm1");
+    var i;
+    for (i = 0; i < x.length;i++) {
+        if (x.elements[i].name == "player1Name") {
+        body["player1"]["name"] = x.elements[i].value;
+        }
+        else if (x.elements[i].name == "player2Name") {
+        body["player2"]["name"] = x.elements[i].value;
+        }
+        else if (x.elements[i].name == "player1Email") {
+        body["player1"]["email"] = x.elements[i].value;
+        }
+        else if (x.elements[i].name == "player2Email") {
+        body["player2"]["email"] = x.elements[i].value;
+        }
+    }
+    console.log(body);
+    // construct an HTTP request
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://8062c85b.ngrok.io/api/foosball/");
+    xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+
+    xhr.onreadystatechange = function() {
+    if (xhr.readyState == XMLHttpRequest.DONE) {
+        console.log(xhr.response);
+        if (xhr.status == 201) {
+        success = ("<font color='green'>" + xhr.status + " " + "Success!</font><br>" + xhr.response);
+        document.getElementById("newGame").innerHTML = success;
+        document.getElementById("frm1").reset();
+        document.getElementById("instaPlay").innerHTML = "";
+        }
+        else {
+        document.getElementById("newGame").innerHTML = "Failure";
+        document.getElementById("newGame").style.color = "red";
+        document.getElementById("instaPlay").innerHTML = "";
+        }
+    }
+    }
+
+    // make the request
+    xhr.send(JSON.stringify(body));
+    }
+
+function instaPlay() {
+    // construct an HTTP request
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://8062c85b.ngrok.io/api/foosball/default");
+    xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+
+    xhr.onreadystatechange = function() {
+    if (xhr.readyState == XMLHttpRequest.DONE) {
+        //console.log(xhr.response);
+        if (xhr.status == 201) {
+        success = ("<font color='green'>" + xhr.status + " " + "Success!</font><br>" + xhr.response);
+        document.getElementById("instaPlay").innerHTML = success;
+        document.getElementById("frm1").reset();
+        document.getElementById("newGame").innerHTML = "";
+        }
+        else {
+        document.getElementById("instaPlay").style.color = "red";
+        document.getElementById("instaPlay").innerHTML = "Failure";
+        }
+    }
+    }
+
+    // make the request
+    xhr.send();
+
+    //console.log(xhr.response);
+    //console.log(xhr.statusText);
+    }
+</script>
+
+<form id="frm1" action="/action_page.php" method="get">
+  Player1 Name: <input type="text" name="player1Name" value=""><br>
+  Player1 Email: <input type="text" name="player1Email" value=""><br><br>
+  Player2 Name: <input type="text" name="player2Name" value=""><br>
+  Player2 Email: <input type="text" name="player2Email" value=""><br>
+</form>
+<br>
+<button type="button" onclick="newGame()">Create New Game!</button>
+<p id="newGame"></p>
+<p>Play now without putting in any information!</p>
+<button type="button" onclick="instaPlay()">InstaPlay!</button>
+<p id="instaPlay"></p>
+</body>
+</html>
