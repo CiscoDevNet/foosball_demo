@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-color: black;
+        }
+    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <style>
+            body {
+                background-color: black;
+            }
+    </style>
+    <div class="container">
+      <div class="jumbotron">
+        <style>
+            .jumbotron {
+                background-color: black;
+            }
+        </style>
+        <img src="images/DevNetFogBall.png" class="img-responsive" style="width:100%">
+      </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+
+                <img id="myImage1" class="img-responsive" src="images/green00.png" style="width:100%">
+
+                <button onclick="increment1()">Increment Score</button>
+            </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+
+                <img id="myImage2" class="img-responsive" src="images/green00.png" style="width:100%">
+
+                <button onclick="increment2()">Increment Score</button>
+            </div>
+        </div>
+
+        <script>
+            var inc1 = 0;
+            var inc2 = 0;
+            var score = '';
+            function increment1() {
+                inc1 += 1;
+                if (inc1 < 10) {
+                    score = 'images/green0' + inc1 + '.png';
+                    document.getElementById('myImage1').src=score;
+                } else {
+                    score = 'images/green' + inc1 + '.png';
+                    document.getElementById('myImage1').src=score;
+                }
+
+            };
+            function increment2() {
+                inc2 += 1;
+                if (inc2 < 10) {
+                    score = 'images/green0' + inc2 + '.png';
+                    document.getElementById('myImage2').src=score;
+                } else {
+                    score = 'images/green' + inc2 + '.png';
+                    document.getElementById('myImage2').src=score;
+                }
+
+            };
+        </script>
+    </div>
+</body>
+</html>
