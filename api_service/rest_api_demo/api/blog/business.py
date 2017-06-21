@@ -1,5 +1,5 @@
-from rest_api_demo.database import db
-from rest_api_demo.database.models import Post, Category
+from api_service.rest_api_demo.database import db
+from api_service.rest_api_demo.database.models import Post, Category
 
 db_host = "localhost"
 db_port = 28015

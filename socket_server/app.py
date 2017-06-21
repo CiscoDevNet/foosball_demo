@@ -17,7 +17,7 @@ thread = None
 
 def background_thread():
     """Example of how to send server generated events to clients."""
-    r.connect("localhost", 28015).repl()
+    r.connect("192.168.73.35", 28015).repl()
     cursor = r.db("foosball").table("games").filter(r.row["active"] == True).changes()
     for i, row in enumerate(cursor.run()):
         if row['new_val'] == None:

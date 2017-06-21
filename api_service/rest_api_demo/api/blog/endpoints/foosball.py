@@ -8,10 +8,10 @@ import time
 
 from flask import request, jsonify
 from flask_restplus import Resource
-from rest_api_demo.api.blog.business import db_host, db_port
-#from rest_api_demo.api.blog.serializers import category
-from rest_api_demo.api.restplus import api
-#from rest_api_demo.database.models import Category
+from api_service.rest_api_demo.api.blog.business import db_host, db_port
+#from api_service.rest_api_demo.api.blog.serializers import category
+from api_service.rest_api_demo.api.restplus import api
+#from api_service.rest_api_demo.database.models import Category
 
 log = logging.getLogger(__name__)
 
@@ -170,6 +170,54 @@ class CategoryItem(Resource):
     @api.expect()
     #@api.response(204, 'Category successfully updated.')
     def post(self):
+        """
+        Create a default game.
+
+        Use this method to reset the system **wihtout input data**.
+
+        * Useful for quick demos.
+
+        """
+        # Init vars
+        keys = ["", ""]
+
+        r.connect(db_host, db_port).repl()
+        active_game = r.db("foosball").table("games").filter(r.row["active"] == True)
+        # Delete any active games
+        for i, row in enumerate(active_game.run()):
+            keys[i] = (str(row["id"]))
+            r.db("foosball").table("games").filter({"id": row["id"]}).update({"active": False}).run()
+
+        curr_time = str((calendar.timegm(time.gmtime())))
+        print("Hello" + curr_time)
+
+        # Default Gameimport rethinkdb as r
+        default_game = json.loads(json.dumps({
+                "player2": {
+                    "name": "Player2",
+                    "email": "player2@cisco.com",
+                    "score": 0
+                },
+                "player1": {
+                    "name": "Player1",
+                    "email": "player1@cisco.com",
+                    "score": 0
+                },
+                "active": True,
+                "time": curr_time
+
+        }))
+
+        # Create a new active game
+        db_resp = r.db("foosball").table("games").insert(default_game).run()
+
+        # Grab the ID to be returned
+        resp_id = db_resp['generated_keys'][0]
+
+        # Return HTTP response to client
+        return {"id": resp_id}, 201
+
+    def options(self):
         """
         Create a default game.
 

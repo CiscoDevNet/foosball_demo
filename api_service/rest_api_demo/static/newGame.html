@@ -34,7 +34,7 @@ function newGame() {
     console.log(body);
     // construct an HTTP request
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://8062c85b.ngrok.io/api/foosball/");
+    xhr.open("POST", "http://127.0.0.1:5000/api/foosball/");
     xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 
     xhr.onreadystatechange = function() {
@@ -61,7 +61,7 @@ function newGame() {
 function instaPlay() {
     // construct an HTTP request
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://8062c85b.ngrok.io/api/foosball/default");
+    xhr.open("POST", "http://127.0.0.1:5000/api/foosball/default");
     xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 
     xhr.onreadystatechange = function() {
