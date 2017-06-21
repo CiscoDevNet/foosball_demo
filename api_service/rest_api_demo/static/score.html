@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Flask-SocketIO Test</title>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.5/socket.io.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function() {
+            // Use a "/test" namespace.
+            // An application can open a connection on multiple namespaces, and
+            // Socket.IO will multiplex all those connections on a single
+            // physical channel. If you don't care about multiple channels, you
+            // can set the namespace to an empty string.
+            namespace = '/test';
+
+            // Connect to the Socket.IO server.
+            // The connection URL has the following format:
+            //     http[s]://<domain>:<port>[/<namespace>]
+            var socket = io.connect(location.protocol + '//' + document.domain + ':' + 5010 + namespace);
+
+
+            // Event handler for server sent data.
+            // The callback function is invoked whenever the server emits data
+            // to the client. The data is then displayed in the "Received"
+            // section of the page.
+            socket.on('my_response', function(msg) {
+                $('#player1').html($('<div/>').text('Player 1: ' + msg.player1).html());
+                $('#player1_score').html($('<div/>').text('Player 1 Score: ' + msg.player1_score).html());
+                $('#player2').html($('<div/>').text('Player 2: ' + msg.player2).html());
+                $('#player2_score').html($('<div/>').text('Player 2 Score: ' + msg.player2_score).html());
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Foosball Score</h1>
+    <h2>Think you can top your friends?</h2>
+
+
+    <h2 id="player1"></h2>
+    <h2 id="player1_score"></h2>
+    <h2 id="player2"></h2>
+    <h2 id="player2_score"></h2>
+    <div id="log"></div>
+</body>
+</html>
