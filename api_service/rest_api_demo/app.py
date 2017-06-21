@@ -16,6 +16,10 @@ app = Flask(__name__)
 def new_game():
     return app.send_static_file('newGame.html')
 
+@app.route('/score')
+def score():
+    return app.send_static_file('score.html')
+
 @app.route('/mgmt')
 def roll():
     return redirect('http://www.piilossa.com/')
