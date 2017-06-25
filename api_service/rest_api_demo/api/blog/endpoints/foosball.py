@@ -8,10 +8,10 @@ import time
 
 from flask import request, jsonify
 from flask_restplus import Resource
-from rest_api_demo.api.blog.business import db_host, db_port
-#from rest_api_demo.api.blog.serializers import category
-from rest_api_demo.api.restplus import api
-#from rest_api_demo.database.models import Category
+from api.blog.business import db_host, db_port
+#from api.blog.serializers import category
+from api.restplus import api
+#from database.models import Category
 
 log = logging.getLogger(__name__)
 
