@@ -1,5 +1,6 @@
 import logging.config
 
+
 from flask import Flask, Blueprint, redirect
 from rest_api_demo import settings
 from rest_api_demo.api.blog.endpoints.foosball import ns as api_foosball
