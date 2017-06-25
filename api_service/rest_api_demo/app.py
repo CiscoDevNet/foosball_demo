@@ -2,7 +2,7 @@ import logging.config
 
 
 from flask import Flask, Blueprint, redirect
-from rest_api_demo import settings
+import settings
 from api.blog.endpoints.foosball import ns as api_foosball
 from api.blog.endpoints.score import ns as api_score
 from api.blog.endpoints.players import ns as api_players
