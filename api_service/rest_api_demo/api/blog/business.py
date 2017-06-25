@@ -1,7 +1,7 @@
 from api_service.rest_api_demo.database import db
 from api_service.rest_api_demo.database.models import Post, Category
 
-db_host = "localhost"
+db_host = "192.168.73.33"
 db_port = 28015
 
 

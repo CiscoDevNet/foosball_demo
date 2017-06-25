@@ -1,32 +1,32 @@
 import paho.mqtt.client as mqtt
 import ast
-from playsound import playsound
+# from playsound import playsound
 import rethinkdb as r
 import json
 import requests
 
-MQTT = "test.mosquitto.org"
+MQTT = "192.168.195.7"
 MQTTPORT = 1883
 client = mqtt.Client()
 type = "api"
 score_to_win = 5
 
 
-r.connect("192.168.194.11", 28015).repl()
+r.connect("192.168.73.33", 28015).repl()
 
 
 def on_connect(client, userdata, flags, rc):
     print("Connected with result " + str(rc))
 
-    client.subscribe("lights/on")
+    client.subscribe("lights/#")
 
 
-def on_message(client, userdata, msg, type):
+def on_message(client, userdata, msg):
     mess = msg.payload.decode('utf-8')
     print(mess)
     data = ast.literal_eval(mess)
     if data["Score"] == 1:
-        playsound("/Users/jocreed/Downloads/ho-my-hes-on-fire.mp3")
+        # playsound("/Users/jocreed/Downloads/ho-my-hes-on-fire.mp3")
         if type == "api":
             url = "http://localhost:5000/api/score/player%s/and1" % (str(data['Player']))
 
@@ -38,10 +38,10 @@ def on_message(client, userdata, msg, type):
 
             print(response.text)
 
-            resp = json.loads((response.data).decode("utf-8"))
+            """resp = json.loads((response.data).decode("utf-8"))
 
             if resp['player%s' % data['Player']]['score'] >= score_to_win:
-                playsound("/Users/jocreed/Downloads/ho-my-hes-on-fire.mp3")
+                # playsound("/Users/jocreed/Downloads/ho-my-hes-on-fire.mp3")"""
 
 
         elif type == "db":

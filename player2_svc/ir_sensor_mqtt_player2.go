@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-        mqttAdaptor := mqtt.NewAdaptor("tcp://test.mosquitto.org:1883", "blinker")
+        mqttAdaptor := mqtt.NewAdaptor("tcp://192.168.195.7:1883", "player2")
         firmataAdaptor := firmata.NewTCPAdaptor("foosballyun2.local:5055")
         sensor := gpio.NewDirectPinDriver(firmataAdaptor, "4")
         led := gpio.NewLedDriver(firmataAdaptor, "13")
@@ -19,7 +19,7 @@ func main() {
         lastState := "LOW"
 
         work := func() {
-                mqttAdaptor.On("lights/on", func(msg mqtt.Message) {
+                mqttAdaptor.On("lights/player2", func(msg mqtt.Message) {
 
                 })
                 gobot.Every(1*time.Millisecond, func() {
@@ -34,11 +34,11 @@ func main() {
                           sensorState = "HIGH"
                         }
                         if sensorState == "LOW" && lastState == "HIGH"{
-                          mqttAdaptor.Publish("lights/on", []byte("{'Status': 'scored', 'Player': '2', 'Score': 0, 'Data':" + strconv.Itoa(data) + "}"))
+                          mqttAdaptor.Publish("lights/player2", []byte("{'Status': 'scored', 'Player': '2', 'Score': 0, 'Data':" + strconv.Itoa(data) + "}"))
                           //time.Sleep(1000*time.Millisecond)
                         }
                         if sensorState == "HIGH" && lastState == "HIGH"{
-                          mqttAdaptor.Publish("lights/on", []byte("{'Status': 'scored', 'Player': '2', 'Score': 1, 'Data':" + strconv.Itoa(data) + "}"))
+                          mqttAdaptor.Publish("lights/player2", []byte("{'Status': 'scored', 'Player': '2', 'Score': 1, 'Data':" + strconv.Itoa(data) + "}"))
                           time.Sleep(1000*time.Millisecond)
                         }
                         lastState = sensorState

@@ -32,13 +32,15 @@
             var socket = io.connect(location.protocol + '//' + document.domain + ':' + 5010 + namespace);
 
 
+
             // Event handler for server sent data.
             // The callback function is invoked whenever the server emits data
             // to the client. The data is then displayed in the "Received"
             // section of the page.
             socket.on('my_response', function(msg) {
-                $('#player1').html($('<div/>').text('Player 1: ' + msg.player1).html());
                 inc1 = msg.player1_score;
+                inc2 = msg.player2_score;
+                console.log(msg);
                 if (inc1 < 10) {
                     score1 = 'images/green0' + inc1 + '.png';
                     document.getElementById('myImage1').src=score1;

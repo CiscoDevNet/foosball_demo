@@ -17,7 +17,7 @@ thread = None
 
 def background_thread():
     """Example of how to send server generated events to clients."""
-    r.connect("192.168.73.35", 28015).repl()
+    r.connect("192.168.73.33", 28015).repl()
     cursor = r.db("foosball").table("games").filter(r.row["active"] == True).changes()
     for i, row in enumerate(cursor.run()):
         if row['new_val'] == None:
@@ -26,8 +26,8 @@ def background_thread():
             output = str(row['new_val'])
             player1 = row['new_val']['player1']['name']
             player2 = row['new_val']['player2']['name']
-            player1_score = row['new_val']['player1']['score']
-            player2_score = row['new_val']['player2']['score']
+            player1_score = str(row['new_val']['player1']['score'])
+            player2_score = str(row['new_val']['player2']['score'])
 
             data = {
                 'player1': player1,
