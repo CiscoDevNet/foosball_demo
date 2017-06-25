@@ -1,14 +1,14 @@
 import logging.config
 
 from flask import Flask, Blueprint, redirect
-from api_service.rest_api_demo import settings
-from api_service.rest_api_demo.api.blog.endpoints.foosball import ns as api_foosball
-from api_service.rest_api_demo.api.blog.endpoints.score import ns as api_score
-from api_service.rest_api_demo.api.blog.endpoints.players import ns as api_players
-from api_service.rest_api_demo.api.restplus import api
-from api_service.rest_api_demo.database import db
+from rest_api_demo import settings
+from rest_api_demo.api.blog.endpoints.foosball import ns as api_foosball
+from rest_api_demo.api.blog.endpoints.score import ns as api_score
+from rest_api_demo.api.blog.endpoints.players import ns as api_players
+from rest_api_demo.api.restplus import api
+from rest_api_demo.database import db
 
-from api_service.rest_api_demo.api.blog.business import db_host, db_port
+from rest_api_demo.api.blog.business import db_host, db_port
 
 app = Flask(__name__)
 #logging.config.fileConfig('logging.conf')
