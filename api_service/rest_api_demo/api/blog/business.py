@@ -1,7 +1,7 @@
 from database import db
 from database.models import Post, Category
 
-db_host = "192.168.73.33"
+db_host = "192.168.73.22"
 db_port = 28015
 
 
