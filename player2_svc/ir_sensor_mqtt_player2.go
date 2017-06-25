@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-        mqttAdaptor := mqtt.NewAdaptor("tcp://192.168.195.7:1883", "player2")
+        mqttAdaptor := mqtt.NewAdaptor("tcp://192.168.73.37:1883", "player2")
         firmataAdaptor := firmata.NewTCPAdaptor("foosballyun2.local:5055")
         sensor := gpio.NewDirectPinDriver(firmataAdaptor, "4")
         led := gpio.NewLedDriver(firmataAdaptor, "13")
