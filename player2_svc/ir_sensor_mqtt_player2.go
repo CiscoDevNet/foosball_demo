@@ -22,7 +22,7 @@ func main() {
                 mqttAdaptor.On("lights/player2", func(msg mqtt.Message) {
 
                 })
-                gobot.Every(1*time.Millisecond, func() {
+                gobot.Every(10*time.Microsecond, func() {
                         data, _ := sensor.DigitalRead()
                         if data == 1{
                           led.Off()
