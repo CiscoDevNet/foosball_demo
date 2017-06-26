@@ -12,7 +12,7 @@ type = "api"
 score_to_win = 5
 
 
-r.connect("192.168.73.33", 28015).repl()
+r.connect("192.168.73.22", 28015).repl()
 
 
 def on_connect(client, userdata, flags, rc):

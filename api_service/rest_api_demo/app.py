@@ -9,7 +9,7 @@ from api.blog.endpoints.players import ns as api_players
 from api.restplus import api
 from database import db
 
-from api.blog.business import db_host, db_port
+# from api.blog.business import db_host, db_port
 
 app = Flask(__name__)
 #logging.config.fileConfig('logging.conf')
